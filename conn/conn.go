@@ -12,7 +12,7 @@ import (
 
 // Struct for future DB connection params
 type Init struct {
-	uri string
+	URI string
 }
 
 // Struct for mongoDB collections
@@ -21,9 +21,9 @@ type collection struct {
 	collection string
 }
 
-func (data *Init) connect() *mongo.Client {
+func (data *Init) Connect() *mongo.Client {
 	// Client options
-	clientOptions := options.Client().ApplyURI(data.uri)
+	clientOptions := options.Client().ApplyURI(data.URI)
 
 	// Connect to mongoDB
 	client, err := mongo.NewClient(clientOptions)
@@ -67,7 +67,7 @@ func (data *Init) connect() *mongo.Client {
 // 	return true
 // }
 
-func setCollection(data *collection, client *mongo.Client) bool {
+func SetCollection(data *collection, client *mongo.Client) bool {
 	collection := client.Database(data.db).Collection(data.collection)
 
 	fmt.Printf("Set collection in %s to %s", data.db, data.collection)
